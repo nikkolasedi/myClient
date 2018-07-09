@@ -1,0 +1,20 @@
+[  
+    {  
+        "name":"Nikkolas",
+        "city":"Karlsruhe",
+        "cars":[  
+            "audi",
+            "bmw"
+        ],
+        "job":"Student"
+    },
+    {  
+        "name":"Edi",
+        "city":"Baden",
+        "cars":[  
+            "VW",
+            "Toyota"
+        ],
+        "job":"Student"
+    }
+]
