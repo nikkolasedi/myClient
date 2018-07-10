@@ -14,19 +14,26 @@ import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
+import org.neo4j.driver.v1.*;
+
+import static org.neo4j.driver.v1.Values.parameters;
 
 public class MyClient {
 	
 
   
-	public static void main (String[] args) {
+public static void main (String[] args) {
+		
+		SmallExample smallExample = new SmallExample("bolt://localhost:7687","nikkolasedi","cobacoba123");
+		smallExample.addPerson("nikko");
+		smallExample.printPeople("N");
 		
 		JSONParser parser = new JSONParser();
 
         try {
         	Registry myReg = LocateRegistry.getRegistry("127.0.0.1",1022);
 			MyInterface c = (MyInterface) myReg.lookup("myRMI");
-        	JSONArray obj = (JSONArray)parser.parse(new FileReader("C:\\Users\\Nikkolas Edi P\\New folder\\MyClient\\src\\myClient\\testfile.json"));
+        	JSONArray obj = (JSONArray)parser.parse(new FileReader("C:\\Users\\Nikkolas Edi P\\git\\repository\\MyClient\\src\\myClient\\testfile.json"));
 
             for (Object o : obj)
             {
