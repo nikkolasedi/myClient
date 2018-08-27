@@ -26,6 +26,21 @@ public class SmallExample {
             }
         }
     }
+    public void fullCheck(String[] input) {
+    	int n = input.length-1;
+    	int i = 0;
+    	for(i=0;i<=n;i++){
+    		if(input[i]==null) {
+    			break;
+    		}
+    	};
+    	if(2*i>n) {
+    		String[] inputTemp = new String[2*n];
+    		inputTemp = input.clone();
+    		input = inputTemp;
+    	}
+    	
+    }
 
     public void printPeople(String initial)
     {
@@ -41,8 +56,40 @@ public class SmallExample {
                 Record record = result.next();
                 // Values can be extracted from a record by index or name.
                 System.out.println(record.get("name").asString());
+                String[] names = new String[5];
+                
             }
         }
+    }
+    public String[] getPeople(String initial)
+    {
+    	String[] names = new String[5];
+        try (Session session = driver.session())
+        {
+            // Auto-commit transactions are a quick and easy way to wrap a read.
+            StatementResult result = session.run(
+                    "MATCH (a:Person) WHERE a.name STARTS WITH {x} RETURN a.name AS name",
+                    parameters("x", initial));
+            // Each Cypher execution returns a stream of records.
+            while (result.hasNext())
+            {
+                Record record = result.next();
+                // Values can be extracted from a record by index or name.
+                String input = record.get("name").asString();
+                fullCheck(names);
+                for(int i = 0; i< names.length; i++) {
+                	if(names[i]!=null) {
+                		
+                	}else {
+                		names[i]=input;
+                		break;
+                	}
+                
+                }
+                
+            }
+        }
+        return names;
     }
 
     public void close()
@@ -51,14 +98,5 @@ public class SmallExample {
         driver.close();
     }
 
-    public static void main(String... args)
-    {
-        SmallExample example = new SmallExample("bolt://localhost:7687", "neo4j", "password");
-        example.addPerson("Ada");
-        example.addPerson("Alice");
-        example.addPerson("Bob");
-        example.printPeople("A");
-        example.close();
-    }
-
+   
 }

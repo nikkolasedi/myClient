@@ -23,15 +23,21 @@ public class MyClient {
 
   
 public static void main (String[] args) {
-		
-		SmallExample smallExample = new SmallExample("bolt://localhost:7687","nikkolasedi","cobacoba123");
-		smallExample.addPerson("nikko");
-		smallExample.printPeople("N");
+	
+		//We dont need this here. We re calling the Neo4J-Datas from Server
+		/*try {
+		SmallExample smallExample = new SmallExample("bolt://localhost:11002","nikkolasedi","cobacoba123");
+		smallExample.addPerson("nikko3");
+		smallExample.printPeople("n");
+		smallExample.close();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		*/
 		
 		JSONParser parser = new JSONParser();
-
         try {
-        	Registry myReg = LocateRegistry.getRegistry("127.0.0.1",1022);
+        	Registry myReg = LocateRegistry.getRegistry("127.0.0.1",1023);
 			MyInterface c = (MyInterface) myReg.lookup("myRMI");
         	JSONArray obj = (JSONArray)parser.parse(new FileReader("C:\\Users\\Nikkolas Edi P\\git\\repository\\MyClient\\src\\myClient\\testfile.json"));
 
@@ -54,6 +60,10 @@ public static void main (String[] args) {
               {
                 System.out.println((String)d+"="+c.length((String)d));
               }
+            }
+            String[] dataNames = c.dataNames();
+            for(int i = 0; i<dataNames.length; i++) {
+            	System.out.println(dataNames[i]);
             }
         }catch (FileNotFoundException e) {
             e.printStackTrace();
