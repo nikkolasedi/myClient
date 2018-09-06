@@ -37,8 +37,10 @@ public static void main (String[] args) {
 		
 		JSONParser parser = new JSONParser();
         try {
-        	Registry myReg = LocateRegistry.getRegistry("127.0.0.1",1023);
+        	Registry myReg = LocateRegistry.getRegistry("127.0.0.1",1036);
 			MyInterface c = (MyInterface) myReg.lookup("myRMI");
+			
+			//Parsing JSON Object from a Folder
         	JSONArray obj = (JSONArray)parser.parse(new FileReader("C:\\Users\\Nikkolas Edi P\\git\\repository\\MyClient\\src\\myClient\\testfile.json"));
 
             for (Object o : obj)

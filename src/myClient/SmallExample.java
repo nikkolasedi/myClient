@@ -12,7 +12,7 @@ public class SmallExample {
         driver = GraphDatabase.driver(uri, AuthTokens.basic(user, password));
     }
 
-    public void addPerson(String name)
+   /* public void addPerson(String name)
     {
         // Sessions are lightweight and disposable connection wrappers.
         try (Session session = driver.session())
@@ -26,7 +26,7 @@ public class SmallExample {
             }
         }
     }
-    public void fullCheck(String[] input) {
+    public String[] fullCheck(String[] input) {
     	int n = input.length-1;
     	int i = 0;
     	for(i=0;i<=n;i++){
@@ -37,8 +37,9 @@ public class SmallExample {
     	if(2*i>n) {
     		String[] inputTemp = new String[2*n];
     		inputTemp = input.clone();
-    		input = inputTemp;
-    	}
+    		return inputTemp;
+    	}else {
+    	return input;}
     	
     }
 
@@ -76,7 +77,7 @@ public class SmallExample {
                 Record record = result.next();
                 // Values can be extracted from a record by index or name.
                 String input = record.get("name").asString();
-                fullCheck(names);
+                names = fullCheck(names);
                 for(int i = 0; i< names.length; i++) {
                 	if(names[i]!=null) {
                 		
@@ -90,7 +91,7 @@ public class SmallExample {
             }
         }
         return names;
-    }
+    }*/
 
     public void close()
     {
